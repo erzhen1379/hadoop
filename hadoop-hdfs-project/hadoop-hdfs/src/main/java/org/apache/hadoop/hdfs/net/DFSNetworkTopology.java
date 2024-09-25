@@ -39,6 +39,8 @@ import java.util.Random;
  * subclassing is to add storage-type-aware chooseRandom method. All the
  * remaining parts should be the same.
  *
+ *
+ *
  * Currently a placeholder to test storage type info.
  */
 public class DFSNetworkTopology extends NetworkTopology {
