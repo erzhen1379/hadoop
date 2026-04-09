@@ -273,7 +273,7 @@ public class PlacementConstraint {
       int max = getMaxCardinality();
       int min = getMinCardinality();
       List<String> targetExprList = getTargetExpressions().stream()
-          .map(TargetExpression::toString).collect(Collectors.toList());
+          .map(TargetExpression::toString).collect(java.util.stream.Collectors.toList());
       List<String> targetConstraints = new ArrayList<>();
       for (String targetExpr : targetExprList) {
         if (min == 0 && max == 0) {
@@ -533,7 +533,7 @@ public class PlacementConstraint {
               .append(op.getOperator()).append(",")
               .append(scope).append(",")
               .append(targetExpression.toString())
-              .toString()).collect(Collectors.toList());
+              .toString()).collect(java.util.stream.Collectors.toList());
       return String.join(":", targetExprs);
     }
 

@@ -47,6 +47,6 @@ public class LeafQueueEntitlements {
   public List<QueueManagementChange> mapToQueueManagementChanges(
       BiFunction<String, QueueCapacities, QueueManagementChange> func) {
     return entitlements.entrySet().stream().map(e -> func.apply(e.getKey(), e.getValue()))
-        .collect(Collectors.toList());
+        .collect(java.util.stream.Collectors.toList());
   }
 }

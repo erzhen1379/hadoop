@@ -130,7 +130,7 @@ public class HdfsCompatEnvironment {
     String[] tmpDirs = systemDefault.split(",|" + File.pathSeparator);
     List<String> validDirs = Arrays.stream(tmpDirs).filter(
         s -> (s != null && !s.isEmpty())
-    ).collect(Collectors.toList());
+    ).collect(java.util.stream.Collectors.toList());
     if (validDirs.isEmpty()) {
       return null;
     }

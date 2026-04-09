@@ -111,7 +111,7 @@ class FsVolumeList {
       List<String> slowDisksToExclude = diskMetrics.getSlowDisksToExclude();
       list = list.stream()
           .filter(volume -> !slowDisksToExclude.contains(volume.getBaseURI().getPath()))
-          .collect(Collectors.toList());
+          .collect(java.util.stream.Collectors.toList());
     }
 
     while (true) {

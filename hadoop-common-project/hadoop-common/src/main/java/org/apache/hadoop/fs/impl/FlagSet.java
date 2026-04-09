@@ -209,7 +209,7 @@ public final class FlagSet<E extends Enum<E>> implements StreamCapabilities {
   public List<String> pathCapabilities() {
     return namesToValues.keySet().stream()
         .filter(this::hasCapability)
-        .collect(Collectors.toList());
+        .collect(java.util.stream.Collectors.toList());
   }
 
   /**

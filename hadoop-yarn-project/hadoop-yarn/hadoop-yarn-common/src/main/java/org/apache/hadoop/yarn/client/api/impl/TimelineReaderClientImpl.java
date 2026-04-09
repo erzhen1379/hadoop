@@ -168,7 +168,7 @@ public class TimelineReaderClientImpl extends TimelineReaderClient {
 
     Response response = doGetUri(baseUri, path, params);
     Set<TimelineEntity> entities = response.readEntity(new GenericType<Set<TimelineEntity>>(){});
-    return entities.stream().collect(Collectors.toList());
+    return entities.stream().collect(java.util.stream.Collectors.toList());
   }
 
   @Override
@@ -214,7 +214,7 @@ public class TimelineReaderClientImpl extends TimelineReaderClient {
 
     Response response = doGetUri(baseUri, path, params);
     Set<TimelineEntity> entities = response.readEntity(new GenericType<Set<TimelineEntity>>(){});
-    return entities.stream().collect(Collectors.toList());
+    return entities.stream().collect(java.util.stream.Collectors.toList());
   }
 
   @VisibleForTesting

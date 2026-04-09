@@ -88,7 +88,7 @@ public class PrefixStorage implements DirectoryStorage {
 
   @Override
   public List<String> batchDelete(List<String> keys) {
-    return storage.batchDelete(keys.stream().map(key -> prefix + key).collect(Collectors.toList()));
+    return storage.batchDelete(keys.stream().map(key -> prefix + key).collect(java.util.stream.Collectors.toList()));
   }
 
   @Override
@@ -106,10 +106,10 @@ public class PrefixStorage implements DirectoryStorage {
   private ListObjectsResponse removePrefix(ListObjectsResponse response) {
     List<ObjectInfo> objects = response.objects().stream()
         .map(this::removePrefix)
-        .collect(Collectors.toList());
+        .collect(java.util.stream.Collectors.toList());
     List<String> commonPrefixKeys = response.commonPrefixes().stream()
         .map(this::removePrefix)
-        .collect(Collectors.toList());
+        .collect(java.util.stream.Collectors.toList());
     return new ListObjectsResponse(objects, commonPrefixKeys);
   }
 

@@ -122,7 +122,7 @@ public class DefaultPlacementAlgorithm implements ConstraintPlacementAlgorithm {
     resp.getRejectedRequests().addAll(
         rejectedRequests.stream().map(
             x -> new SchedulingRequestWithPlacementAttempt(
-                placementAttempt, x)).collect(Collectors.toList()));
+                placementAttempt, x)).collect(java.util.stream.Collectors.toList()));
     collector.collect(resp);
     // Clean current temp-container tags
     this.tagsManager.cleanTempContainers(requests.getApplicationId());

@@ -99,7 +99,7 @@ public class BulkDeleteOperationCallbacksImpl implements
     } else {
       return errors.stream()
           .map(e -> pair(e.key(), e.toString()))
-          .collect(Collectors.toList());
+          .collect(java.util.stream.Collectors.toList());
     }
   }
 

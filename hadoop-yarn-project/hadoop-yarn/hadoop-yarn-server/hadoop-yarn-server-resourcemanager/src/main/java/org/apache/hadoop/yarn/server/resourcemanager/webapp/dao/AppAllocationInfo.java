@@ -63,7 +63,7 @@ public class AppAllocationInfo {
     Map<String, List<ActivityNode>> requestToActivityNodes =
         allocation.getAllocationAttempts().stream().collect(Collectors
             .groupingBy((e) -> e.getRequestPriority() + "_" + e
-                .getAllocationRequestId(), Collectors.toList()));
+                .getAllocationRequestId(), java.util.stream.Collectors.toList()));
     for (List<ActivityNode> requestActivityNodes : requestToActivityNodes
         .values()) {
       AppRequestAllocationInfo requestAllocationInfo =

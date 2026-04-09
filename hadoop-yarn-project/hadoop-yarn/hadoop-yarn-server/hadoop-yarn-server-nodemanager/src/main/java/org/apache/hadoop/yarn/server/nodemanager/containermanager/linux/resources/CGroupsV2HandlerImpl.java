@@ -91,7 +91,7 @@ class CGroupsV2HandlerImpl extends AbstractCGroupsHandler {
   @Override
   protected List<CGroupController> getCGroupControllers() {
     return Arrays.stream(CGroupController.values()).filter(CGroupController::isInV2)
-            .collect(Collectors.toList());
+            .collect(java.util.stream.Collectors.toList());
   }
 
   @Override

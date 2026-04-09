@@ -255,7 +255,7 @@ public class PriorityUtilizationQueueOrderingPolicy
         .map(queue -> PriorityQueueResourcesForSorting.create(queue, partition))
         .sorted(new PriorityQueueComparator(partition))
         .map(PriorityQueueResourcesForSorting::getQueue)
-        .collect(Collectors.toList()).iterator();
+        .collect(java.util.stream.Collectors.toList()).iterator();
   }
 
   @Override

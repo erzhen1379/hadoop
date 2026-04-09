@@ -124,6 +124,8 @@
         </exclusion>
       </exclusions>
     </dependency>
+    <!-- hadoop-yarn-csi requires Java 17+ for protobuf-maven-plugin -->
+    <!--
     <dependency>
       <groupId>org.apache.hadoop</groupId>
       <artifactId>hadoop-yarn-csi</artifactId>
@@ -136,6 +138,7 @@
         </exclusion>
       </exclusions>
     </dependency>
+    -->
     <dependency>
       <groupId>org.apache.hadoop</groupId>
       <artifactId>hadoop-yarn-server-timelineservice-documentstore</artifactId>

@@ -230,7 +230,7 @@ public class LoadManifestsStage extends
     // this scans the map
     final List<DirEntry> toCreate = manifest.getDestDirectories().stream()
         .filter(e -> !directories.containsKey(e))
-        .collect(Collectors.toList());
+        .collect(java.util.stream.Collectors.toList());
     if (!toCreate.isEmpty()) {
       // need to add more directories;
       // still a possibility that they may be created between the

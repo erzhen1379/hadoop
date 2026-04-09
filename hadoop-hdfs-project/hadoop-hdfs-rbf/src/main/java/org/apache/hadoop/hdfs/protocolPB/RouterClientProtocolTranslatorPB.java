@@ -1791,7 +1791,7 @@ public class RouterClientProtocolTranslatorPB extends ClientNamenodeProtocolTran
     }
     List<ErasureCodingPolicyProto> protos = Arrays.stream(policies)
         .map(PBHelperClient::convertErasureCodingPolicy)
-        .collect(Collectors.toList());
+        .collect(java.util.stream.Collectors.toList());
     AddErasureCodingPoliciesRequestProto req =
         AddErasureCodingPoliciesRequestProto.newBuilder()
             .addAllEcPolicies(protos).build();

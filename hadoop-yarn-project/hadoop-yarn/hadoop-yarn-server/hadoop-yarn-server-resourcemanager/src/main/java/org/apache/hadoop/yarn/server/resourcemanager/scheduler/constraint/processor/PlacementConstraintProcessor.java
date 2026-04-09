@@ -262,7 +262,7 @@ public class PlacementConstraintProcessor extends AbstractPlacementProcessor {
               .map(sr -> RejectedSchedulingRequest.newInstance(
                   RejectionReason.COULD_NOT_PLACE_ON_NODE,
                   sr.getSchedulingRequest()))
-              .collect(Collectors.toList()));
+              .collect(java.util.stream.Collectors.toList()));
     }
     List<SchedulingRequest> rejectedRequests =
         this.requestsToReject.get(appAttemptId.getApplicationId());
@@ -275,7 +275,7 @@ public class PlacementConstraintProcessor extends AbstractPlacementProcessor {
             rejectedRequests.stream()
                 .map(sr -> RejectedSchedulingRequest.newInstance(
                     RejectionReason.COULD_NOT_SCHEDULE_ON_NODE, sr))
-                .collect(Collectors.toList()));
+                .collect(java.util.stream.Collectors.toList()));
         rejectedRequests.clear();
       }
     }

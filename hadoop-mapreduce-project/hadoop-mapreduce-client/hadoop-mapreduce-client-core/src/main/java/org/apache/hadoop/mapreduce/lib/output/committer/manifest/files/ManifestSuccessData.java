@@ -382,7 +382,7 @@ public class ManifestSuccessData
   public List<Path> getFilenamePaths() {
     return getFilenames().stream()
         .map(AbstractManifestData::unmarshallPath)
-        .collect(Collectors.toList());
+        .collect(java.util.stream.Collectors.toList());
   }
 
   /**
@@ -393,7 +393,7 @@ public class ManifestSuccessData
     setFilenames(new ArrayList<>(
         paths.stream()
             .map(AbstractManifestData::marshallPath)
-            .collect(Collectors.toList())));
+            .collect(java.util.stream.Collectors.toList())));
   }
 
   public void setFilenames(ArrayList<String> filenames) {

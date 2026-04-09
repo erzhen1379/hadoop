@@ -314,7 +314,7 @@ public class JavaSandboxLinuxContainerRuntime
         .map(group -> conf.get(YARN_CONTAINER_SANDBOX_POLICY_GROUP_PREFIX
             + group))
         .filter(groupPolicy -> groupPolicy != null)
-        .collect(Collectors.toList());
+        .collect(java.util.stream.Collectors.toList());
   }
 
   /**

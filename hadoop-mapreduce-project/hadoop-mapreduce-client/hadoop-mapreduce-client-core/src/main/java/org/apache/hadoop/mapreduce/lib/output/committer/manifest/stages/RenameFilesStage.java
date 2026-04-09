@@ -141,7 +141,7 @@ public class RenameFilesStage extends
         committed
             .subList(0, Math.min(committed.size(), args.getRight()))
             .stream().map(FileEntry::getDestPath)
-            .collect(Collectors.toList()));
+            .collect(java.util.stream.Collectors.toList()));
 
     success.setSuccess(true);
 

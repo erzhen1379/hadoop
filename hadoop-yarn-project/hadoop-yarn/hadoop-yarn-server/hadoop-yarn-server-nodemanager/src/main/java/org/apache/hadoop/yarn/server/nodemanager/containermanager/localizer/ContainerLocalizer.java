@@ -426,7 +426,7 @@ public class ContainerLocalizer {
 
     return Stream.concat(adminOptionList.stream(), userOptionList.stream())
         .filter(s -> !s.isEmpty())
-        .collect(Collectors.toList());
+        .collect(java.util.stream.Collectors.toList());
   }
 
   /**

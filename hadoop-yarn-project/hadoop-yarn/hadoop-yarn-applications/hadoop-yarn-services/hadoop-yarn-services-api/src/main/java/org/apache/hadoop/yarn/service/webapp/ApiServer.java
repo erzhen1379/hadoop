@@ -612,7 +612,7 @@ public class ApiServer {
           Objects.toString(containerStates, "[]"), ugi);
 
         List<ContainerState> containerStatesDe = containerStates.stream().map(
-            ContainerState::valueOf).collect(Collectors.toList());
+            ContainerState::valueOf).collect(java.util.stream.Collectors.toList());
 
         return Response.ok(getContainers(ugi, serviceName, componentNames,
             version, containerStatesDe)).build();

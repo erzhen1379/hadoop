@@ -62,7 +62,7 @@ public final class AbfsIoUtils {
         } else {
           valuesList = valuesList.stream()
               .map(v -> v == null ? "" : v) // replace null with empty string
-              .collect(Collectors.toList());
+              .collect(java.util.stream.Collectors.toList());
         }
         String values = StringUtils.join(";", valuesList);
         if (key.contains("Cookie")) {

@@ -550,7 +550,7 @@ public class AppSchedulingInfo {
           .map(ap -> RejectedSchedulingRequest.newInstance(
               RejectionReason.COULD_NOT_SCHEDULE_ON_NODE,
               ap.getSchedulingRequest()))
-          .collect(Collectors.toList());
+          .collect(java.util.stream.Collectors.toList());
     } finally {
       this.readLock.unlock();
     }

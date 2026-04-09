@@ -495,7 +495,7 @@ public class FederationInterceptor extends AbstractRequestInterceptor {
               containerIdToSubClusterIdMap.entrySet().stream()
               .filter(item-> item.getValue().equals(subClusterId))
               .map(Entry::getKey)
-              .collect(Collectors.toList());
+              .collect(java.util.stream.Collectors.toList());
           for (ContainerId containerId : containerIds) {
             containerIdToSubClusterIdMap.remove(containerId);
           }

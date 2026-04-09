@@ -540,7 +540,7 @@ public class ZookeeperFederationStateStore implements FederationStateStore {
           .sorted(Comparator.comparing(ApplicationHomeSubCluster::getCreateTime).reversed())
           .filter(appHomeSC -> filterHomeSubCluster(requestSC, appHomeSC.getHomeSubCluster()))
           .limit(maxAppsInStateStore)
-          .collect(Collectors.toList());
+          .collect(java.util.stream.Collectors.toList());
       long end = clock.getTime();
       opDurations.addGetAppsHomeSubClusterDuration(start, end);
       LOG.info("filterSubClusterId = {}, appCount = {}.", requestSC, result.size());

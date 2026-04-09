@@ -730,7 +730,7 @@ public class RawFileSystem extends FileSystem {
       return xAttrs;
     } else {
       List<String> badNames = names.stream().filter(n -> !xAttrs.containsKey(n)).collect(
-          Collectors.toList());
+          java.util.stream.Collectors.toList());
       throw new IOException("Attributes with name " + badNames + " are not found.");
     }
   }

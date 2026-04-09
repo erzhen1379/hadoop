@@ -164,7 +164,7 @@ public final class CredentialProviderListFactory {
     final Collection<String> classnames = conf.getTrimmedStringCollection(key);
     if (classnames.isEmpty()) {
       // empty list; return the defaults
-      return Arrays.stream(defaultValue).map(c -> c.getName()).collect(Collectors.toList());
+      return Arrays.stream(defaultValue).map(c -> c.getName()).collect(java.util.stream.Collectors.toList());
     } else {
       return classnames;
     }

@@ -1378,7 +1378,7 @@ public class RouterClientProtocol implements ClientProtocol {
     final List<RemoteLocation> locations = new ArrayList<>();
     // remove the redundancy remoteLocation order by destination.
     ns2Locations.forEach((k, v) -> {
-      List<RemoteLocation> sortedList = v.stream().sorted().collect(Collectors.toList());
+      List<RemoteLocation> sortedList = v.stream().sorted().collect(java.util.stream.Collectors.toList());
       int size = sortedList.size();
       for (int i = size - 1; i > -1; i--) {
         RemoteLocation currentLocation = sortedList.get(i);
@@ -2025,7 +2025,7 @@ public class RouterClientProtocol implements ClientProtocol {
           PathLocation pathLoc = subclusterResolver.getDestinationForPath(routerPath);
           List<String> namespaces = pathLoc.getDestinations().stream().map(
               RemoteLocation::getNameserviceId).collect(
-                  Collectors.toList());
+                  java.util.stream.Collectors.toList());
           int existingIdx = namespaces.indexOf(resolvedPaths.get(routerPath).getNameserviceId());
           int currentIdx = namespaces.indexOf(remoteLoc.getNameserviceId());
           if (currentIdx < existingIdx && currentIdx != -1) {

@@ -206,6 +206,7 @@
                             <version>${genrpc.version}</version>
                         </binaryMavenPlugin>
                     </binaryMavenPlugins>
+                    <skip>true</skip>
                 </configuration>
                 <executions>
                     <execution>

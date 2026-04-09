@@ -100,7 +100,7 @@ public class GetSubClustersInfoResponsePBImpl
       builder.clearSubClusterInfos();
       return;
     }
-    this.subClusterInfos = subClusters.stream().collect(Collectors.toList());
+    this.subClusterInfos = subClusters.stream().collect(java.util.stream.Collectors.toList());
     addSubClusterInfosToProto();
   }
 

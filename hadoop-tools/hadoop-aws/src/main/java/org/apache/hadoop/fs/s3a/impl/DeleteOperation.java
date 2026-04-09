@@ -426,7 +426,7 @@ public class DeleteOperation extends ExecutingStoreOperation<Boolean> {
         List<ObjectIdentifier> files = keyList.stream()
             .filter(e -> !e.isDirMarker)
             .map(e -> e.objectIdentifier)
-            .collect(Collectors.toList());
+            .collect(java.util.stream.Collectors.toList());
         LOG.debug("Deleting of {} file objects", files.size());
         Invoker.once("Remove S3 Files",
             status.getPath().toString(),
@@ -438,7 +438,7 @@ public class DeleteOperation extends ExecutingStoreOperation<Boolean> {
         List<ObjectIdentifier> dirs = keyList.stream()
             .filter(e -> e.isDirMarker)
             .map(e -> e.objectIdentifier)
-            .collect(Collectors.toList());
+            .collect(java.util.stream.Collectors.toList());
         if (!dirs.isEmpty()) {
           LOG.debug("Deleting {} directory markers", dirs.size());
           // This is invoked with deleteFakeDir.

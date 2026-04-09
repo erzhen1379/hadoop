@@ -162,7 +162,7 @@ public class AppsBlock extends RouterBlock {
     if (appsInfo != null && CollectionUtils.isNotEmpty(appsInfo.getApps())) {
 
       List<String> appInfoList =
-          appsInfo.getApps().stream().map(this::parseAppInfoData).collect(Collectors.toList());
+          appsInfo.getApps().stream().map(this::parseAppInfoData).collect(java.util.stream.Collectors.toList());
 
       if (CollectionUtils.isNotEmpty(appInfoList)) {
         String formattedAppInfo = StringUtils.join(appInfoList, ",");

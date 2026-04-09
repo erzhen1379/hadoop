@@ -45,17 +45,17 @@ public final class ActivitiesUtils {
               .collect(Collectors.groupingBy(ActivityNode::getState, Collectors
                   .groupingBy(ActivityNode::getShortDiagnostic,
                       Collectors.mapping(e -> e.getNodeId() == null ? "" :
-                          e.getNodeId().toString(), Collectors.toList()))));
+                          e.getNodeId().toString(), java.util.stream.Collectors.toList()))));
       return groupingResults.entrySet().stream().flatMap(
           stateMap -> stateMap.getValue().entrySet().stream().map(
               diagMap -> new ActivityNodeInfo(stateMap.getKey(),
                   diagMap.getKey().isEmpty() ? null : diagMap.getKey(),
                   diagMap.getValue())))
-          .collect(Collectors.toList());
+          .collect(java.util.stream.Collectors.toList());
     } else {
       return activityNodes.stream().filter(e -> e.getNodeId() != null)
           .map(e -> new ActivityNodeInfo(e.getName(), e.getState(),
-              e.getDiagnostic(), e.getNodeId())).collect(Collectors.toList());
+              e.getDiagnostic(), e.getNodeId())).collect(java.util.stream.Collectors.toList());
     }
   }
 }

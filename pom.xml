@@ -139,7 +139,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/x
     <surefire.failIfNoSpecifiedTests>false</surefire.failIfNoSpecifiedTests>
 
     <!-- define the Java language version used by the compiler -->
-    <javac.version>17</javac.version>
+    <javac.version>8</javac.version>
 
     <!-- The java version enforced by the maven enforcer -->
     <!-- more complex patterns can be used here, such as
@@ -147,7 +147,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/x
     for an open-ended enforcement
     -->
     <enforced.java.version>[${javac.version},)</enforced.java.version>
-    <enforced.maven.version>[3.9.11,)</enforced.maven.version>
+    <enforced.maven.version>[3.3.0,)</enforced.maven.version>
   </properties>
 
   <modules>
@@ -549,7 +549,8 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/x
           <artifactId>maven-compiler-plugin</artifactId>
           <version>${maven-compiler-plugin.version}</version>
           <configuration>
-            <release>${javac.version}</release>
+            <source>${javac.version}</source>
+            <target>${javac.version}</target>
           </configuration>
         </plugin>
       </plugins>

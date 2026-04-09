@@ -159,7 +159,7 @@ public class DataNodeDiskMetrics {
                   -> Double.compare(o2.getMaxLatency(), o1.getMaxLatency()));
 
               slowDisksToExclude = diskLatencies.stream().limit(maxSlowDisksToExclude)
-                  .map(DiskLatency::getSlowDisk).collect(Collectors.toList());
+                  .map(DiskLatency::getSlowDisk).collect(java.util.stream.Collectors.toList());
             }
           }
 

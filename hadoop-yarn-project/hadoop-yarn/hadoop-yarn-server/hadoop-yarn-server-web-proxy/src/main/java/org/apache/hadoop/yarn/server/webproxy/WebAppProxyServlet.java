@@ -555,7 +555,7 @@ public class WebAppProxyServlet extends HttpServlet {
       String toFetchQuery = toFetch.getQuery();
       if (toFetchQuery != null) {
         String redirectFlagName = conf.get(YarnConfiguration.PROXY_REDIRECT_FLAG, "");
-        if (!redirectFlagName.isBlank() && toFetchQuery.contains(redirectFlagName + "=true")) {
+        if (!redirectFlagName.trim().isEmpty() && toFetchQuery.contains(redirectFlagName + "=true")) {
           ProxyUtils.sendRedirect(req, resp, toFetch.toString());
           return;
         }

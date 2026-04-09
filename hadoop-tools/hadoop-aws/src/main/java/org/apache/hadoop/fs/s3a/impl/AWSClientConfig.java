@@ -446,7 +446,7 @@ public final class AWSClientConfig {
         List<String> headerValues = Arrays.stream(valueString.split(";"))
                         .map(String::trim)
                         .filter(v -> !v.isEmpty())
-                        .collect(Collectors.toList());
+                        .collect(java.util.stream.Collectors.toList());
         if (!headerValues.isEmpty()) {
           clientConfig.putHeader(header, headerValues);
         } else {

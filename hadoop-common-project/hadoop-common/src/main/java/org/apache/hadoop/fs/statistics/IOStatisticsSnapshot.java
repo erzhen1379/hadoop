@@ -313,7 +313,7 @@ public final class IOStatisticsSnapshot
    */
   public static List<Class> requiredSerializationClasses() {
     return Arrays.stream(DESERIALIZATION_CLASSES)
-        .collect(Collectors.toList());
+        .collect(java.util.stream.Collectors.toList());
   }
 
 }

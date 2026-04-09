@@ -144,7 +144,7 @@ public class InMemoryAliasMapProtocolClientSideTranslatorPB
             PBHelperClient.convert(kv.getKey()),
             PBHelperClient.convert(kv.getValue())
         ))
-        .collect(Collectors.toList());
+        .collect(java.util.stream.Collectors.toList());
     BlockProto nextMarker = response.getNextMarker();
 
     if (nextMarker.isInitialized()) {

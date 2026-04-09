@@ -304,7 +304,7 @@ public final class MarkerTool extends S3GuardTool {
             .stream()
             .map(p-> p.toString() + "/")
             .sorted()
-            .collect(Collectors.toList());
+            .collect(java.util.stream.Collectors.toList());
         IOUtils.writeLines(surplus, "\n", writer);
       }
     }
@@ -755,7 +755,7 @@ public final class MarkerTool extends S3GuardTool {
     List<ObjectIdentifier> collect =
         markers.values().stream()
             .map(p -> ObjectIdentifier.builder().key(p.getKey()).build())
-            .collect(Collectors.toList());
+            .collect(java.util.stream.Collectors.toList());
     // build an array list for ease of creating the lists of
     // keys in each page through the subList() method.
     List<ObjectIdentifier> markerKeys =

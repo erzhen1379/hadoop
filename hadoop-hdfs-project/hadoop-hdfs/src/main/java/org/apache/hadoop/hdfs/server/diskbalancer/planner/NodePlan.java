@@ -194,7 +194,7 @@ public class NodePlan {
         Map.Entry<String, JsonNode> entry = fieldsIterator.next();
         if ("@class".equals(entry.getKey())) {
           String textValue = entry.getValue().asText();
-          if (textValue != null && !textValue.isBlank() && !stepClassIsAllowed(textValue)) {
+          if (textValue != null && !textValue.trim().isEmpty() && !stepClassIsAllowed(textValue)) {
             throw new IOException("Invalid @class value in NodePlan JSON: " + textValue);
           }
         }
@@ -249,6 +249,6 @@ public class NodePlan {
         .stream()
         .map(String::trim)
         .filter(s -> !s.isEmpty())
-        .toList();
+        .collect(java.util.stream.Collectors.toList());
   }
 }

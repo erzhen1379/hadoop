@@ -109,7 +109,7 @@ public class AliasMapProtocolServerSideTranslatorPB
       List<FileRegion> fileRegions = iterationResult.getFileRegions();
 
       List<KeyValueProto> keyValueProtos = fileRegions.stream()
-          .map(PBHelper::convert).collect(Collectors.toList());
+          .map(PBHelper::convert).collect(java.util.stream.Collectors.toList());
       responseBuilder.addAllFileRegions(keyValueProtos);
       Optional<Block> nextMarker = iterationResult.getNextBlock();
       nextMarker

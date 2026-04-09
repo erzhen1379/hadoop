@@ -87,7 +87,7 @@ public class ActivityNodeInfo {
     } else {
       this.children = node.getChildren().stream()
           .map(e -> new ActivityNodeInfo(e, groupBy))
-          .collect(Collectors.toList());
+          .collect(java.util.stream.Collectors.toList());
     }
   }
 

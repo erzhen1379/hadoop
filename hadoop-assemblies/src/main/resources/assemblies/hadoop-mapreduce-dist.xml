@@ -156,6 +156,7 @@
         <unpack>false</unpack>
       </binaries>
     </moduleSet>
+    <!--
     <moduleSet>
       <includes>
         <include>org.apache.hadoop:hadoop-mapreduce-client-jobclient</include>
@@ -168,6 +169,7 @@
         <unpack>false</unpack>
       </binaries>
     </moduleSet>
+    -->
   </moduleSets>
   <dependencySets>
     <dependencySet>

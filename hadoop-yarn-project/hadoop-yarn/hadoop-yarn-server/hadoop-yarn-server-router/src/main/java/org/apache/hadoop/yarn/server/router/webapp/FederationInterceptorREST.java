@@ -820,7 +820,7 @@ public class FederationInterceptorREST extends AbstractRESTRequestInterceptor {
       routerMetrics.incrMultipleAppsFailedRetrieved();
       LOG.error("Subcluster {} failed to return appReport.", subCluster.getSubClusterId());
       return null;
-    }).collect(Collectors.toList());
+    }).collect(java.util.stream.Collectors.toList());
 
     appsInfos.forEach(appsInfo -> {
       if (appsInfo != null) {

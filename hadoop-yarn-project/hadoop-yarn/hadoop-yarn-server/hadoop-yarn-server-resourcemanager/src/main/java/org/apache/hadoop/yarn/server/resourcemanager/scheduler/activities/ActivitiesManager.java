@@ -146,7 +146,7 @@ public class ActivitiesManager extends AbstractService {
               .filterAllocationAttempts(requestPriorities,
                   allocationRequestIds))
               .filter(e -> !e.getAllocationAttempts().isEmpty())
-              .collect(Collectors.toList());
+              .collect(java.util.stream.Collectors.toList());
         } else {
           allocations = new ArrayList(curAllocations);
         }

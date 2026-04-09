@@ -291,7 +291,7 @@ public class NodeQueueLoadMonitor implements ClusterMonitor {
   protected void updateSortedNodes() {
     List<NodeId> nodeIds = sortNodes(true).stream()
         .map(n -> n.nodeId)
-        .collect(Collectors.toList());
+        .collect(java.util.stream.Collectors.toList());
     sortedNodes.clear();
     sortedNodes.addAll(nodeIds);
   }

@@ -117,7 +117,7 @@ public final class CodecRegistry {
       List<RawErasureCoderFactory> coders = entry.getValue();
       coderNameMap.put(codecName, coders.stream().
           map(RawErasureCoderFactory::getCoderName).
-          collect(Collectors.toList()).toArray(new String[0]));
+          collect(java.util.stream.Collectors.toList()).toArray(new String[0]));
       coderNameCompactMap.put(codecName, coders.stream().
           map(RawErasureCoderFactory::getCoderName)
           .collect(Collectors.joining(", ")));

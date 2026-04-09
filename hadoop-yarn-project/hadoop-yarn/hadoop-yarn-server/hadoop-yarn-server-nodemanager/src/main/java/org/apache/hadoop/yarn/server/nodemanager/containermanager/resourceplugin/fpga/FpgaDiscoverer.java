@@ -126,7 +126,7 @@ public class FpgaDiscoverer extends Configured {
       list = list
         .stream()
         .filter(dev -> minors.contains(String.valueOf(dev.getMinor())))
-        .collect(Collectors.toList());
+        .collect(java.util.stream.Collectors.toList());
 
       currentFpgaInfo = ImmutableList.copyOf(list);
 

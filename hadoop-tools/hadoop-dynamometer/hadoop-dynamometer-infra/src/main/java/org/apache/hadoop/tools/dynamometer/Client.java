@@ -749,7 +749,7 @@ public class Client extends Configured implements Tool {
         "Can only specify multiple source paths if using an ARCHIVE type");
 
     List<URI> srcURIs = Arrays.stream(srcPaths).map(URI::create)
-        .collect(Collectors.toList());
+        .collect(java.util.stream.Collectors.toList());
     Set<String> srcSchemes = srcURIs.stream().map(URI::getScheme)
         .collect(Collectors.toSet());
     Preconditions.checkArgument(srcSchemes.size() == 1,
@@ -763,7 +763,7 @@ public class Client extends Configured implements Tool {
         || srcScheme.equals("jar")) {
       // Need to upload this resource to remote storage
       List<File> srcFiles = srcURIs.stream().map(URI::getSchemeSpecificPart)
-          .map(File::new).collect(Collectors.toList());
+          .map(File::new).collect(java.util.stream.Collectors.toList());
       Path dstPathBase = getRemoteStoragePath(getConf(), appId);
       boolean shouldArchive = srcFiles.size() > 1
           || srcFiles.get(0).isDirectory()

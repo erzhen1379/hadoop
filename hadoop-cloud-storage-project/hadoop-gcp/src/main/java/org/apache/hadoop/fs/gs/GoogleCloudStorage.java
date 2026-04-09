@@ -379,7 +379,7 @@ class GoogleCloudStorage {
     Storage.ComposeRequest request =
         Storage.ComposeRequest.newBuilder()
             .addSource(
-                sources.stream().map(StorageResourceId::getObjectName).collect(Collectors.toList()))
+                sources.stream().map(StorageResourceId::getObjectName).collect(java.util.stream.Collectors.toList()))
             .setTarget(
                 BlobInfo.newBuilder(destination.getBucketName(), destination.getObjectName())
                     .setContentType(options.getContentType())
@@ -921,7 +921,7 @@ class GoogleCloudStorage {
     List<StorageResourceId> sourceIds =
         sources.stream()
             .map(objectName -> new StorageResourceId(bucketName, objectName))
-            .collect(Collectors.toList());
+            .collect(java.util.stream.Collectors.toList());
     StorageResourceId destinationId = new StorageResourceId(bucketName, destination);
     CreateObjectOptions options =
         CreateObjectOptions.DEFAULT_OVERWRITE.toBuilder()

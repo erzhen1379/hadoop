@@ -318,7 +318,7 @@ public class GpuResourceAllocator {
           ContainerId containerId = e.getValue();
           return new AssignedGpuDevice(gpu.getIndex(), gpu.getMinorNumber(),
               containerId);
-        }).collect(Collectors.toList());
+        }).collect(java.util.stream.Collectors.toList());
   }
 
   @Override

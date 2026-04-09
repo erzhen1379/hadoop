@@ -1606,7 +1606,7 @@ public class RouterClientNamenodeProtocolServerSideTranslatorPB
         List<HdfsProtos.AddErasureCodingPolicyResponseProto> responseProtos =
             Arrays.stream(result)
                 .map(PBHelperClient::convertAddErasureCodingPolicyResponse)
-                .collect(Collectors.toList());
+                .collect(java.util.stream.Collectors.toList());
         AddErasureCodingPoliciesResponseProto response =
             AddErasureCodingPoliciesResponseProto.newBuilder()
                 .addAllResponses(responseProtos).build();

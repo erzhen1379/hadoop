@@ -232,7 +232,7 @@ public class AliyunOSSFileSystemStore {
       statistics.incrementWriteOps(1);
       final List<String> deletedObjects = result.getDeletedObjects();
       keysToDelete = keysToDelete.stream().filter(item -> !deletedObjects.contains(item))
-          .collect(Collectors.toList());
+          .collect(java.util.stream.Collectors.toList());
       tries++;
       if (tries == retry) {
         break;

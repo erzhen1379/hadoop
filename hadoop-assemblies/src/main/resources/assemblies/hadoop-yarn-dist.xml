@@ -296,6 +296,7 @@
         <unpack>false</unpack>
       </binaries>
     </moduleSet>
+    <!--
     <moduleSet>
       <includes>
         <include>org.apache.hadoop:hadoop-yarn-server-tests</include>
@@ -307,6 +308,7 @@
         <unpack>false</unpack>
       </binaries>
     </moduleSet>
+    -->
   </moduleSets>
   <dependencySets>
     <dependencySet>

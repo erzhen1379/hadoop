@@ -199,7 +199,7 @@ public class DatanodeAdminBackoffMonitor extends DatanodeAdminMonitorBase
           // Re-queue unhealthy nodes to make space for decommissioning healthy nodes
           final List<DatanodeDescriptor> unhealthyDns = outOfServiceNodeBlocks.keySet().stream()
               .filter(dn -> !blockManager.isNodeHealthyForDecommissionOrMaintenance(dn))
-              .collect(Collectors.toList());
+              .collect(java.util.stream.Collectors.toList());
           getUnhealthyNodesToRequeue(unhealthyDns, numDecommissioningNodes).forEach(dn -> {
             getPendingNodes().add(dn);
             outOfServiceNodeBlocks.remove(dn);

@@ -265,7 +265,7 @@ public class FileStore implements ObjectStorage {
   public Iterable<ListObjectsResponse> list(ListObjectsRequest request) {
     try (Stream<Path> stream = Files.walk(Paths.get(root))) {
       List<ObjectInfo> allObjects = list(stream, request.prefix(), request.startAfter())
-          .collect(Collectors.toList());
+          .collect(java.util.stream.Collectors.toList());
       int maxKeys = request.maxKeys() < 0 ? allObjects.size() : request.maxKeys();
       return Collections.singletonList(
           splitObjects(request.prefix(), request.delimiter(), maxKeys, request.startAfter(),
@@ -487,7 +487,7 @@ public class FileStore implements ObjectStorage {
     try (Stream<Path> stream = Files.list(uploadDir.toPath())) {
       return stream
           .map(f -> Integer.valueOf(f.toFile().getName()))
-          .collect(Collectors.toList());
+          .collect(java.util.stream.Collectors.toList());
     } catch (IOException e) {
       LOG.error("failed to list part files.");
       throw new RuntimeException(e);
@@ -527,7 +527,7 @@ public class FileStore implements ObjectStorage {
             }
           })
           .sorted()
-          .collect(Collectors.toList());
+          .collect(java.util.stream.Collectors.toList());
     } catch (IOException e) {
       throw new RuntimeException(e);
     }

@@ -127,7 +127,7 @@ public class WeightToPercentConverter
             return e2.getValue().compareTo(e1.getValue());
           }
         })
-        .collect(Collectors.toList());
+        .collect(java.util.stream.Collectors.toList());
 
     String highestCapacityQueue = sortedEntries.get(0).getKey();
     BigDecimal highestCapacity = sortedEntries.get(0).getValue();

@@ -169,7 +169,7 @@ public class CommitOperations extends AbstractStoreOperation
   public static List<CompletedPart> toPartEtags(List<UploadEtag> tagIds) {
     return IntStream.range(0, tagIds.size())
         .mapToObj(i -> UploadEtag.toCompletedPart(tagIds.get(i), i + 1))
-        .collect(Collectors.toList());
+        .collect(java.util.stream.Collectors.toList());
   }
 
   @Override

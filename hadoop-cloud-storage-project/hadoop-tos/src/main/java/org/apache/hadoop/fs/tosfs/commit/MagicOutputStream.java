@@ -147,7 +147,7 @@ public class MagicOutputStream extends ObjectOutputStream {
     String path = p.toUri().getPath();
     List<String> splits = Arrays.stream(path.split("/"))
         .filter(StringUtils::isNoneEmpty)
-        .collect(Collectors.toList());
+        .collect(java.util.stream.Collectors.toList());
     return splits.contains(CommitUtils.MAGIC) && !isInternalFile(p);
   }
 }

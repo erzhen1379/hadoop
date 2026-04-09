@@ -285,13 +285,13 @@ public class HdfsCompatApiScope {
     private void exportTo(HdfsCompatReport report) {
       if (this.setUp == Result.SKIP) {
         List<String> cases = results.keySet().stream().map(m -> prefix + m)
-            .collect(Collectors.toList());
+            .collect(java.util.stream.Collectors.toList());
         report.addSkippedCase(cases);
         return;
       }
       if ((this.setUp == Result.ERROR) || (this.tearDown == Result.ERROR)) {
         List<String> cases = results.keySet().stream().map(m -> prefix + m)
-            .collect(Collectors.toList());
+            .collect(java.util.stream.Collectors.toList());
         report.addFailedCase(cases);
         return;
       }

@@ -415,7 +415,7 @@ public class JournalNode implements Tool, Configurable, JournalNodeMXBean {
     return journalsById.values().stream()
         .map(j -> j.getStorage().getClusterID())
         .filter(cid -> !Strings.isNullOrEmpty(cid))
-        .distinct().collect(Collectors.toList());
+        .distinct().collect(java.util.stream.Collectors.toList());
   }
 
   @Override // JournalNodeMXBean
@@ -433,7 +433,7 @@ public class JournalNode implements Tool, Configurable, JournalNodeMXBean {
   public List<String> getStorageInfos() {
     return journalsById.values().stream()
         .map(journal -> journal.getStorage().toMapString())
-        .collect(Collectors.toList());
+        .collect(java.util.stream.Collectors.toList());
   }
 
   /**

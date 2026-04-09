@@ -98,7 +98,7 @@ public class AwsStatisticsCollector implements MetricPublisher {
 
     final long[] throttling = {0};
     recurseThroughChildren(metricCollection)
-        .collect(Collectors.toList())
+        .collect(java.util.stream.Collectors.toList())
         .forEach(m -> {
           counter(m, CoreMetric.RETRY_COUNT, retries -> {
             collector.updateAwsRetryCount(retries);

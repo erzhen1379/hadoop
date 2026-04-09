@@ -122,7 +122,7 @@ public class NameNodeResourceChecker {
                 return true;
               }
               return false;
-            }).collect(Collectors.toList());
+            }).collect(java.util.stream.Collectors.toList());
 
     // Add all the local edits dirs, marking some as required if they are
     // configured as such.

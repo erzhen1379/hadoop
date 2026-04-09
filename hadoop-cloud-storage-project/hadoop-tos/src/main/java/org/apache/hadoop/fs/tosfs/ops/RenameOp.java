@@ -194,7 +194,7 @@ public class RenameOp {
       List<Part> parts = results.stream()
           .map(CompletableFuture::join)
           .sorted(Comparator.comparing(Part::num))
-          .collect(Collectors.toList());
+          .collect(java.util.stream.Collectors.toList());
 
       finishUpload(multipartUpload.key(), multipartUpload.uploadId(), parts);
     } catch (Exception e) {

@@ -79,10 +79,10 @@ public class RuleBasedLdapGroupsMapping extends LdapGroupsMapping {
     switch (rule) {
     case TO_UPPER:
       return groups.stream().map(StringUtils::toUpperCase).collect(
-          Collectors.toList());
+          java.util.stream.Collectors.toList());
     case TO_LOWER:
       return groups.stream().map(StringUtils::toLowerCase).collect(
-          Collectors.toList());
+          java.util.stream.Collectors.toList());
     case NONE:
     default:
       return groups;

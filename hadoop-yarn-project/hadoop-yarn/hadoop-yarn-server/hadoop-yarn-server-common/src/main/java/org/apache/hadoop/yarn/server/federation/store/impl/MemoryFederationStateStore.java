@@ -344,7 +344,7 @@ public class MemoryFederationStateStore implements FederationStateStore {
         .sorted(Comparator.comparing(ApplicationHomeSubCluster::getCreateTime).reversed())
         .filter(appHomeSC -> filterHomeSubCluster(requestSC, appHomeSC.getHomeSubCluster()))
         .limit(maxAppsInStateStore)
-        .collect(Collectors.toList());
+        .collect(java.util.stream.Collectors.toList());
 
     LOG.info("filterSubClusterId = {}, appCount = {}.", requestSC, result.size());
     return GetApplicationsHomeSubClusterResponse.newInstance(result);

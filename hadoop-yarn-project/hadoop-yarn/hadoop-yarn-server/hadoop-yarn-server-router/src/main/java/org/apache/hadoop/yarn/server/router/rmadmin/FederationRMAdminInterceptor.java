@@ -713,7 +713,7 @@ public class FederationRMAdminInterceptor extends AbstractRMAdminRequestIntercep
       if (CollectionUtils.isNotEmpty(responses)) {
         // We selected a subCluster, the list is not empty and size=1.
         List<CheckForDecommissioningNodesResponse> collects =
-            responses.stream().collect(Collectors.toList());
+            responses.stream().collect(java.util.stream.Collectors.toList());
         if (!collects.isEmpty() && collects.size() == 1) {
           CheckForDecommissioningNodesResponse response = collects.get(0);
           long stopTime = clock.getTime();

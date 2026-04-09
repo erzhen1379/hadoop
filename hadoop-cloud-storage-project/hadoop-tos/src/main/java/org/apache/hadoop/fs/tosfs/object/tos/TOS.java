@@ -707,7 +707,7 @@ public class TOS implements DirectoryStorage {
     return listObjectsOutput.getCommonPrefixes()
         .stream()
         .map(ListedCommonPrefix::getPrefix)
-        .collect(Collectors.toList());
+        .collect(java.util.stream.Collectors.toList());
   }
 
   private List<ObjectInfo> listObjectsOutputToObjectInfos(
@@ -721,7 +721,7 @@ public class TOS implements DirectoryStorage {
             obj.getSize(),
             obj.getLastModified(),
             parseChecksum(obj, checksumInfo)))
-        .collect(Collectors.toList());
+        .collect(java.util.stream.Collectors.toList());
   }
 
   private ListObjectsType2Input createListObjectsType2Input(
@@ -770,7 +770,7 @@ public class TOS implements DirectoryStorage {
             .partNumber(part.num())
             .size(part.size())
             .build()
-    ).collect(Collectors.toList());
+    ).collect(java.util.stream.Collectors.toList());
     CompleteMultipartUploadV2Input input = CompleteMultipartUploadV2Input.builder()
         .bucket(bucket)
         .key(key)
@@ -894,7 +894,7 @@ public class TOS implements DirectoryStorage {
     checkAvailableClient();
     List<Tag> tags = newTags.entrySet().stream()
         .map(e -> new Tag().setKey(e.getKey()).setValue(e.getValue()))
-        .collect(Collectors.toList());
+        .collect(java.util.stream.Collectors.toList());
 
     if (tags.size() > 0) {
       client.putObjectTagging(createPutTagInput(bucket, key, tags));

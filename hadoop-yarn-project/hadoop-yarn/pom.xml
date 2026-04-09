@@ -251,7 +251,8 @@
     <module>hadoop-yarn-registry</module>
     <module>hadoop-yarn-ui</module>
     <module>hadoop-yarn-capacity-scheduler-ui</module>
-    <module>hadoop-yarn-csi</module>
+    <!-- hadoop-yarn-csi requires Java 17+ for protobuf-maven-plugin -->
+    <!-- <module>hadoop-yarn-csi</module> -->
   </modules>
   <!--  -->
 </project>

@@ -212,7 +212,7 @@ public class FileSystemMultipartUploader extends AbstractMultipartUploader {
           return new Path(new String(byteArray, 0, byteArray.length,
               StandardCharsets.UTF_8));
         })
-        .collect(Collectors.toList());
+        .collect(java.util.stream.Collectors.toList());
 
     int count = partHandles.size();
     // built up to identify duplicates -if the size of this set is

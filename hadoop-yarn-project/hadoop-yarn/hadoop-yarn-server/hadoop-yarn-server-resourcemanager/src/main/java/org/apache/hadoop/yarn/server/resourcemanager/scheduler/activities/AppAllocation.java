@@ -122,7 +122,7 @@ public class AppAllocation {
                 || allocationRequestIds.contains(e.getAllocationRequestId()));
     appAllocation.allocationAttempts =
         this.allocationAttempts.stream().filter(predicate)
-            .collect(Collectors.toList());
+            .collect(java.util.stream.Collectors.toList());
     return appAllocation;
   }
 

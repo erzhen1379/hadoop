@@ -484,7 +484,7 @@ public class ServiceClient extends AppAdminClient implements SliderExitCodes,
       throws IOException, YarnException {
     GetCompInstancesResponseProto result = filterContainers(appName, components,
         version, containerStates != null ? containerStates.stream()
-            .map(Enum::toString).collect(Collectors.toList()) : null);
+            .map(Enum::toString).collect(java.util.stream.Collectors.toList()) : null);
 
     return ServiceApiUtil.COMP_CONTAINERS_JSON_SERDE.fromJson(
         result.getCompInstances());

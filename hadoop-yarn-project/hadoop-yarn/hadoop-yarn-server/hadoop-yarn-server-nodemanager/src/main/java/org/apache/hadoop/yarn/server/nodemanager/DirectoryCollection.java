@@ -596,7 +596,7 @@ public class DirectoryCollection {
     try (Stream<java.nio.file.Path> walk = Files.walk(dir.toPath())) {
       List<File> subs = walk
           .map(java.nio.file.Path::toFile)
-          .collect(Collectors.toList());
+          .collect(java.util.stream.Collectors.toList());
       for (File sub : subs) {
         if (sub.isDirectory()) {
           DiskChecker.checkDir(sub);

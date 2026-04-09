@@ -261,7 +261,7 @@ public class ObjectOutputStream extends OutputStream {
     return results.stream()
         .map(CompletableFuture::join)
         .sorted(Comparator.comparing(Part::num))
-        .collect(Collectors.toList());
+        .collect(java.util.stream.Collectors.toList());
   }
 
   @Override

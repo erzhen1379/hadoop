@@ -21,11 +21,13 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.TimeZone;
+import java.util.stream.Collectors;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.io.Text;
@@ -1202,7 +1204,7 @@ public abstract class FederationStateStoreBaseTest {
     setPolicyConf("Queue2", "PolicyType2");
 
     // with a PreparedStatement it is treated as a literal queue name that does not match.
-    List<String> queues = List.of("' OR '1'='1");
+    List<String> queues = Arrays.asList("' OR '1'='1");
     federationStateStore.deletePoliciesConfigurations(
         DeleteSubClusterPoliciesConfigurationsRequest.newInstance(queues));
 
@@ -1214,7 +1216,7 @@ public abstract class FederationStateStoreBaseTest {
     List<String> remaining = response.getPoliciesConfigs()
         .stream()
         .map(SubClusterPolicyConfiguration::getQueue)
-        .toList();
+        .collect(Collectors.toList());
     assertThat(remaining)
         .contains("Queue1");
     assertThat(remaining)
@@ -1225,7 +1227,8 @@ public abstract class FederationStateStoreBaseTest {
   public void testEmptyQueueNameRejected() throws Exception {
     // The input validator must reject a request that contains a blank queue name.
     DeleteSubClusterPoliciesConfigurationsRequest request =
-        DeleteSubClusterPoliciesConfigurationsRequest.newInstance(List.of("ValidQueue", ""));
+        DeleteSubClusterPoliciesConfigurationsRequest.newInstance(
+            Arrays.asList("ValidQueue", ""));
     LambdaTestUtils.intercept(YarnException.class, "Missing Queue",
         () -> getStateStore().deletePoliciesConfigurations(request));
   }

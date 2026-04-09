@@ -110,7 +110,7 @@ public class HostRestrictingAuthorizationFilter implements Filter {
         anyRules : new ArrayList<Rule>();
 
     List<Rule> rules = Stream.of(userRules, anyRules)
-        .flatMap(l -> l.stream()).collect(Collectors.toList());
+        .flatMap(l -> l.stream()).collect(java.util.stream.Collectors.toList());
 
     for (Rule rule : rules) {
       SubnetUtils.SubnetInfo subnet = rule.getSubnet();

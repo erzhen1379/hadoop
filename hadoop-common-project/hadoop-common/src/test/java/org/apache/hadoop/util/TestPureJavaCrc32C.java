@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
-import java.util.zip.CRC32C;
 import java.util.zip.Checksum;
 
 import org.apache.hadoop.util.concurrent.SubjectInheritingThread;
@@ -44,8 +43,7 @@ public class TestPureJavaCrc32C {
   }
 
   /**
-   * Performance tests to compare performance of the Pure Java CRC32C
-   * implementation to the built-in java.util.zip.CRC32C implementation.
+   * Performance tests for the Pure Java CRC32C implementation.
    * This can be run from the command line with:
    * <pre><code>
    *   ./mvnw clean install -pl :hadoop-common -am -DskipTests
@@ -61,10 +59,8 @@ public class TestPureJavaCrc32C {
     public static final int MAX_LEN = 32 * 1024 * 1024; // up to 32MB chunks
     public static final int BYTES_PER_SIZE = MAX_LEN * 4;
 
-    static final Class<? extends Checksum> zip = CRC32C.class;
     static final List<Class<? extends Checksum>> CRCS = new ArrayList<>();
     static {
-      CRCS.add(zip);
       CRCS.add(PureJavaCrc32C.class);
     }
 
@@ -132,11 +128,8 @@ public class TestPureJavaCrc32C {
               c.getSimpleName().length() + 1, out);
 
           // check result
-          if (c == zip) {
+          if (expected == null) {
             expected = result;
-          } else if (expected == null) {
-            throw new RuntimeException("The first class is "
-                + c.getName() + " but not " + zip.getName());
           } else if (result.value != expected.value) {
             throw new RuntimeException(c + " has bugs!");
           }

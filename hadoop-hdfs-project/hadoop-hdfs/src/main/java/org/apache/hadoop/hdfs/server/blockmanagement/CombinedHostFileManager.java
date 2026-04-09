@@ -100,7 +100,7 @@ public class CombinedHostFileManager extends HostConfigManager {
           allDNs.get(address.getAddress()).stream().filter(
               input -> (input.getPort() == 0 ||
                   input.getPort() == address.getPort())).collect(
-              Collectors.toList());
+              java.util.stream.Collectors.toList());
       return datanode.iterator().hasNext() ?
           datanode.iterator().next().getUpgradeDomain() : null;
     }
@@ -119,7 +119,7 @@ public class CombinedHostFileManager extends HostConfigManager {
           allDNs.entries().stream().filter(
               entry -> entry.getValue().getAdminState().equals(
                   AdminStates.DECOMMISSIONED)).collect(
-              Collectors.toList()));
+              java.util.stream.Collectors.toList()));
     }
 
     synchronized long getMaintenanceExpireTimeInMS(
@@ -130,7 +130,7 @@ public class CombinedHostFileManager extends HostConfigManager {
                   AdminStates.IN_MAINTENANCE) &&
                   (input.getPort() == 0 ||
                       input.getPort() == address.getPort())).collect(
-              Collectors.toList());
+              java.util.stream.Collectors.toList());
       // if DN isn't set to maintenance state, ignore MaintenanceExpireTimeInMS
       // set in the config.
       return datanode.iterator().hasNext() ?

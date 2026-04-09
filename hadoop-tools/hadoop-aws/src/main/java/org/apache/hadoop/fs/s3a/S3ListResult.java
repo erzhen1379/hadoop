@@ -108,7 +108,7 @@ public class S3ListResult {
   private List<String> objectKeys() {
     return getS3Objects().stream()
         .map(S3Object::key)
-        .collect(Collectors.toList());
+        .collect(java.util.stream.Collectors.toList());
   }
 
   /**

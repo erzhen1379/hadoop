@@ -665,7 +665,7 @@ public class RouterCLI extends Configured implements Tool {
       List<String> queues = null;
       if (cliParser.hasOption(OPTION_QUEUES)) {
         String tmpQueues = cliParser.getOptionValue(OPTION_QUEUES);
-        queues = Arrays.stream(tmpQueues.split(",")).collect(Collectors.toList());
+        queues = Arrays.stream(tmpQueues.split(",")).collect(java.util.stream.Collectors.toList());
       }
 
       // List Policies.

@@ -156,7 +156,7 @@ public class ExtendedLogMetaRequest {
         List<String> equalExpressions = expressions.stream().filter(
             e -> !e.startsWith(ComparisonExpression.GREATER_OPERATOR) &&
                 !e.startsWith(ComparisonExpression.LESSER_OPERATOR))
-            .collect(Collectors.toList());
+            .collect(java.util.stream.Collectors.toList());
         if (equalExpressions.size() > 1) {
           throw new IllegalArgumentException(
               "Can not process more, than one exact match. Matches: "
@@ -164,7 +164,7 @@ public class ExtendedLogMetaRequest {
         }
 
         this.comparisonExpressions = expressions.stream()
-            .map(ComparisonExpression::new).collect(Collectors.toList());
+            .map(ComparisonExpression::new).collect(java.util.stream.Collectors.toList());
 
       }
 

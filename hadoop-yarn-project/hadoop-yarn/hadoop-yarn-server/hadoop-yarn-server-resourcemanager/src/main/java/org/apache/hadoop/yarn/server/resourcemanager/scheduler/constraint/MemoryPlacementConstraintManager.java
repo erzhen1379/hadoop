@@ -264,7 +264,7 @@ public class MemoryPlacementConstraintManager
             && placementConstraint.getConstraintExpr() != null)
             .map(PlacementConstraint::getConstraintExpr)
             .distinct()
-            .collect(Collectors.toList());
+            .collect(java.util.stream.Collectors.toList());
 
     // Compose an AND constraint
     // When merge request(RC), app(AC) and global constraint(GC),

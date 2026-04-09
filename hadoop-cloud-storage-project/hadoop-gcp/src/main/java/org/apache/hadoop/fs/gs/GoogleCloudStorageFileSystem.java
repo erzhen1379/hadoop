@@ -766,7 +766,7 @@ class GoogleCloudStorageFileSystem {
     List<String> sourceObjects =
         sources.stream()
             .map(uri -> StorageResourceId.fromStringPath(uri.toString()).getObjectName())
-            .collect(Collectors.toList());
+            .collect(java.util.stream.Collectors.toList());
     gcs.compose(
         destResource.getBucketName(), sourceObjects, destResource.getObjectName(), contentType);
   }
