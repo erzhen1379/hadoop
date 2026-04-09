@@ -34,6 +34,7 @@ class ErasureCodingWork extends BlockReconstructionWork {
   private final byte[] liveBusyBlockIndices;
   private final byte[] excludeReconstructedIndices;
   private final String blockPoolId;
+  private final boolean preferReconstructForLeavingService;
 
   public ErasureCodingWork(String blockPoolId, BlockInfo block,
       BlockCollection bc,
@@ -42,13 +43,14 @@ class ErasureCodingWork extends BlockReconstructionWork {
       List<DatanodeStorageInfo> liveReplicaStorages,
       int additionalReplRequired, int priority,
       byte[] liveBlockIndices, byte[] liveBusyBlockIndices,
-      byte[] excludeReconstrutedIndices) {
+      byte[] excludeReconstrutedIndices, boolean preferReconstructForLeavingService) {
     super(block, bc, srcNodes, containingNodes,
         liveReplicaStorages, additionalReplRequired, priority);
     this.blockPoolId = blockPoolId;
     this.liveBlockIndices = liveBlockIndices;
     this.liveBusyBlockIndices = liveBusyBlockIndices;
     this.excludeReconstructedIndices = excludeReconstrutedIndices;
+    this.preferReconstructForLeavingService = preferReconstructForLeavingService;
     LOG.debug("Creating an ErasureCodingWork to {} reconstruct ",
         block);
   }
@@ -149,14 +151,26 @@ class ErasureCodingWork extends BlockReconstructionWork {
     } else if ((numberReplicas.decommissioning() > 0 ||
         numberReplicas.liveEnteringMaintenanceReplicas() > 0) &&
         hasAllInternalBlocks()) {
-      List<Integer> leavingServiceSources = findLeavingServiceSources();
-      // decommissioningSources.size() should be >= targets.length
-      final int num = Math.min(leavingServiceSources.size(), targets.length);
-      if (num == 0) {
-        flag = false;
-      }
-      for (int i = 0; i < num; i++) {
-        createReplicationWork(leavingServiceSources.get(i), targets[i]);
+      if(preferReconstructForLeavingService){
+        byte[] liveBlockIndicesForReconstruct = getLiveBlockIndicesForInServiceNodes();
+        DatanodeDescriptor[] inServiceSrcNodes = getInServiceSrcNodes();
+        LOG.debug("Using EC reconstruction for decommissioning node. Block: {}, "+
+                        "liveBlockIndices: {}, inServiceSrcNodes: {}, target: {}",
+                stripedBlk, java.util.Arrays.toString(liveBlockIndicesForReconstruct),
+                java.util.Arrays.toString(inServiceSrcNodes), targets[0]);
+        targets[0].getDatanodeDescriptor().addBlockToBeErasureCoded(
+                new ExtendedBlock(blockPoolId, stripedBlk), inServiceSrcNodes, targets,
+                liveBlockIndicesForReconstruct, excludeReconstructedIndices, stripedBlk.getErasureCodingPolicy());
+      }else {
+        List<Integer> leavingServiceSources = findLeavingServiceSources();
+        // decommissioningSources.size() should be >= targets.length
+        final int num = Math.min(leavingServiceSources.size(), targets.length);
+        if (num == 0) {
+          flag = false;
+        }
+        for (int i = 0; i < num; i++) {
+          createReplicationWork(leavingServiceSources.get(i), targets[i]);
+        }
       }
     } else {
       targets[0].getDatanodeDescriptor().addBlockToBeErasureCoded(
@@ -164,6 +178,39 @@ class ErasureCodingWork extends BlockReconstructionWork {
           liveBlockIndices, excludeReconstructedIndices, stripedBlk.getErasureCodingPolicy());
     }
     return flag;
+  }
+
+  private byte[] getLiveBlockIndicesForInServiceNodes() {
+    List<Byte> inServiceIndices = new ArrayList<>();
+    for (int i = 0; i < getSrcNodes().length; i++) {
+      DatanodeDescriptor dn = getSrcNodes()[i];
+      boolean inService = dn.isInService();
+      if (inService) {
+        inServiceIndices.add(liveBlockIndices[i]);
+      }
+    }
+    byte[] result = new byte[inServiceIndices.size()];
+    for (int i = 0; i < result.length; i++) {
+      result[i] = inServiceIndices.get(i);
+    }
+    LOG.debug("getLiveBlockIndicesForInServiceNodes: filtered from {} to {} in-service nodes. " +
+            "Block indices: {}", getSrcNodes().length, result.length,
+            java.util.Arrays.toString(result));
+    return result;
+  }
+  private DatanodeDescriptor[] getInServiceSrcNodes() {
+    List<DatanodeDescriptor> inServiceNodes = new ArrayList<>();
+    for (int i = 0; i < getSrcNodes().length; i++) {
+      DatanodeDescriptor dn = getSrcNodes()[i];
+      boolean inService = dn.isInService();
+      if (inService) {
+        inServiceNodes.add(dn);
+      }
+    }
+    DatanodeDescriptor[] result = inServiceNodes.toArray(new DatanodeDescriptor[0]);
+    LOG.debug("getInServiceSrcNodes: filtered from {} to {} in-service nodes. Result: {}",
+            getSrcNodes().length, result.length, java.util.Arrays.toString(result));
+    return result;
   }
 
   private void createReplicationWork(int sourceIndex,

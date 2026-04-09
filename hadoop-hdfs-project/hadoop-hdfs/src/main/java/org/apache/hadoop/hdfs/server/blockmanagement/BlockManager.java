@@ -491,6 +491,8 @@ public class BlockManager implements BlockStatsMXBean {
 
   /** Storages accessible from multiple DNs. */
   private final ProvidedStorageMap providedStorageMap;
+  /* ec reconstruct*/
+  private boolean preferReconstructForLeavingService;
 
   /**
    * Timeout for excess redundancy block.
@@ -614,6 +616,10 @@ public class BlockManager implements BlockStatsMXBean {
     setExcessRedundancyTimeoutCheckLimit(conf.getLong(
         DFS_NAMENODE_EXCESS_REDUNDANCY_TIMEOUT_CHECK_LIMIT,
         DFS_NAMENODE_EXCESS_REDUNDANCY_TIMEOUT_CHECK_LIMIT_DEFAULT));
+
+    this.preferReconstructForLeavingService =
+            conf.getBoolean(DFS_NAMENODE_DECOMMISSION_EC_PREFER_RECONSTRUCT_KEY,
+                    DFS_NAMENODE_DECOMMISSION_EC_PREFER_RECONSTRUCT_DEFAULT);
 
     printInitialConfigs();
   }
@@ -2329,7 +2335,7 @@ public class BlockManager implements BlockStatsMXBean {
       }
       return new ErasureCodingWork(getBlockPoolId(), block, bc, newSrcNodes,
           containingNodes, liveReplicaNodes, additionalReplRequired,
-          priority, newIndices, busyIndices, excludeReconstructedIndices);
+          priority, newIndices, busyIndices, excludeReconstructedIndices, this.preferReconstructForLeavingService);
     } else {
       return new ReplicationWork(block, bc, srcNodes,
           containingNodes, liveReplicaNodes, additionalReplRequired,
@@ -3129,7 +3135,7 @@ public class BlockManager implements BlockStatsMXBean {
             .filter(block -> block instanceof ExcessBlockInfo)
             .map(block -> (ExcessBlockInfo) block)
             .sorted(Comparator.comparingLong(ExcessBlockInfo::getTimeStamp))
-            .collect(Collectors.toList());
+            .collect(java.util.stream.Collectors.toList());
 
         for (ExcessBlockInfo excessBlockInfo : sortedBlocks) {
           if (processed >= excessRedundancyTimeoutCheckLimit) {
